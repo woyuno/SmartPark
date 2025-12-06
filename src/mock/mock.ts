@@ -1,5 +1,9 @@
 import Mock from "mockjs";
+Mock.setup({
+  timeout: "200-600",
+});
 Mock.mock("https://www.demo.com/login", "post", (options: any) => {
+  console.log("options", options);
   const { username, password } = JSON.parse(options.body);
   if (username === "admin" && password === "123456") {
     return {

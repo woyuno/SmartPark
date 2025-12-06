@@ -6,20 +6,27 @@ import { Button, Form, Input } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { login } from "../../api/users";
 import { authStore } from "../../store/store";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 function Login() {
   const [form] = Form.useForm();
-  const { tokenValue, setToken } = authStore((state: any) => state);
-
+  const [loading, setLoading] = useState<boolean>(false);
+  const { setToken } = authStore((state) => state);
+  const navigate = useNavigate();
   function handleLogin() {
     form
       .validateFields()
       .then(async (res) => {
+        setLoading(true);
         const {
           data: { token },
         } = await login(res);
+        setLoading(false);
         setToken(token);
+        navigate("/", { replace: true });
       })
       .catch((err) => {
+        setLoading(false);
         console.error(err);
       });
   }
@@ -31,7 +38,7 @@ function Login() {
             <div className="logo">
               <img src={logo} alt="" width={100} />
             </div>
-            <h1>鹏远智慧管理平台{tokenValue}</h1>
+            <h1>鹏远智慧管理平台</h1>
           </div>
           <Form form={form}>
             <Form.Item
@@ -61,6 +68,7 @@ function Login() {
                 style={{ width: "100%" }}
                 size="large"
                 onClick={handleLogin}
+                loading={loading}
               >
                 登录
               </Button>

@@ -4,13 +4,17 @@ import axios, {
   AxiosResponse,
 } from "axios";
 import { message } from "antd";
-
+import { authStore } from "../../store/store";
 const http: AxiosInstance = axios.create({
   baseURL: "https://www.demo.com",
   timeout: 5000,
 });
 // 请求拦截器
 http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+  const stateToken = authStore.getState().stateToken;
+  if (stateToken) {
+    config.headers["Authorization"] = `Bearer ${stateToken}`;
+  }
   return config;
 });
 // 响应拦截器

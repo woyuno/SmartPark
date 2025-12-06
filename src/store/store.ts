@@ -1,17 +1,21 @@
 import { create } from "zustand";
-
-export const authStore = create((set) => ({
-  tokenValue: sessionStorage.getItem("token") || null,
+interface AuthState {
+  stateToken: string | null;
+  setToken: (token: string) => void;
+  clearToken: () => void;
+}
+export const authStore = create<AuthState>((set) => ({
+  stateToken: sessionStorage.getItem("token") || null,
   setToken: (token: string) => {
     sessionStorage.setItem("token",token);
     set({
-      tokenValue:token
+      stateToken:token
     });
   },
   clearToken: () => {
     sessionStorage.removeItem("token");
     set({
-      tokenValue: null,
+      stateToken: null,
     });
   },
 }));
