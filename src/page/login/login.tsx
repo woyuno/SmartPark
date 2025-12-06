@@ -4,18 +4,20 @@ import lgbg from "../../assets/lgbg.jpg";
 import logo from "../../assets/logo.png";
 import { Button, Form, Input } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import http from "../../utils/http/http";
-import { useEffect } from "react";
 import { login } from "../../api/users";
+import { authStore } from "../../store/store";
 function Login() {
   const [form] = Form.useForm();
+  const { tokenValue, setToken } = authStore((state: any) => state);
 
   function handleLogin() {
     form
       .validateFields()
       .then(async (res) => {
-        const data = await login(res);
-        console.log("结果是", data);
+        const {
+          data: { token },
+        } = await login(res);
+        setToken(token);
       })
       .catch((err) => {
         console.error(err);
@@ -29,7 +31,7 @@ function Login() {
             <div className="logo">
               <img src={logo} alt="" width={100} />
             </div>
-            <h1>鹏远智慧管理平台</h1>
+            <h1>鹏远智慧管理平台{tokenValue}</h1>
           </div>
           <Form form={form}>
             <Form.Item
