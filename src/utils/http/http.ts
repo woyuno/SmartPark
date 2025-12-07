@@ -7,7 +7,7 @@ const http: AxiosInstance = axios.create({
 })
 // 请求拦截器
 http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  const stateToken = authStore.getState().stateToken
+  const stateToken = authStore.getState().tokenStore
   if (stateToken) {
     config.headers['Authorization'] = `Bearer ${stateToken}`
   }

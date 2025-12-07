@@ -8,8 +8,8 @@ interface Iprops {
 }
 
 function RequireAuth({ allowed, redirectTo, children }: Iprops) {
-  const { stateToken } = authStore((state) => state)
-  const isLogin = stateToken ? true : false
+  const { tokenStore } = authStore((state) => state)
+  const isLogin = tokenStore ? true : false
   const navigate = useNavigate()
   useEffect(() => {
     if (allowed !== isLogin) {

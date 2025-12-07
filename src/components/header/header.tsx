@@ -17,14 +17,14 @@ const items: MenuProps['items'] = [
 ]
 
 function MyHeader() {
-  const { clearToken } = authStore((state) => state)
+  const { clearTokenStore } = authStore((state) => state)
   const [collapsed, setCollapsed] = useState<boolean>(false)
   const onClick: MenuProps['onClick'] = ({ key }) => {
     if (key === '1') {
       // 跳转到个人中心
     } else {
       // 退出登录
-      clearToken()
+      clearTokenStore()
       sessionStorage.removeItem('username')
     }
   }

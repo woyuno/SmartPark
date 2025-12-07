@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import getAntdIcon from './getAntdIcon'
 import logo from '../../assets/logo.png'
 import './navLeft.scss'
+import { authStore } from '../../store/store'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -16,12 +17,14 @@ interface MenuItemFromData {
 }
 
 function NavLeft() {
+  const { setMenuListStore } = authStore((state) => state)
   const [menuDate, setMenuData] = useState<MenuItem[]>([])
   useEffect(() => {
     configMenu()
   }, [])
   async function configMenu() {
     const { data } = await getMenu()
+    setMenuListStore(data)
     const mapedMenuItems = mapMenuItems(data)
     setMenuData(mapedMenuItems)
   }

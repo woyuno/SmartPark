@@ -11,7 +11,7 @@ import { useState } from 'react'
 function Login() {
   const [form] = Form.useForm()
   const [loading, setLoading] = useState<boolean>(false)
-  const { setToken } = authStore((state) => state)
+  const { setTokenStore } = authStore((state) => state)
   const navigate = useNavigate()
   function handleLogin() {
     form
@@ -22,7 +22,7 @@ function Login() {
           data: { token, username },
         } = await login(res)
         setLoading(false)
-        setToken(token) 
+        setTokenStore(token) 
         sessionStorage.setItem('username', username)
         navigate('/', { replace: true })
       })

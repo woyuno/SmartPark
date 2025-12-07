@@ -1,21 +1,29 @@
 import { create } from 'zustand'
 interface AuthState {
-  stateToken: string | null
-  setToken: (token: string) => void
-  clearToken: () => void
+  tokenStore: string | null
+  menuListStore: []
+  setTokenStore: (token: string) => void
+  clearTokenStore: () => void
+  setMenuListStore: (menuList: []) => void
 }
 export const authStore = create<AuthState>((set) => ({
-  stateToken: sessionStorage.getItem('token') || null,
-  setToken: (token: string) => {
+  tokenStore: sessionStorage.getItem('token') || null,
+  menuListStore: [],
+  setTokenStore: (token: string) => {
     sessionStorage.setItem('token', token)
     set({
-      stateToken: token,
+      tokenStore: token,
     })
   },
-  clearToken: () => {
+  clearTokenStore: () => {
     sessionStorage.removeItem('token')
     set({
-      stateToken: null,
+      tokenStore: null,
+    })
+  },
+  setMenuListStore: (menuList: []) => {
+    set({
+      menuListStore: menuList,
     })
   },
 }))
