@@ -1,14 +1,14 @@
-import React from "react";
-import { createBrowserRouter } from "react-router-dom";
-import RequireAuth from "../utils/RequireAuth";
+import React from 'react'
+import { createBrowserRouter } from 'react-router-dom'
+import RequireAuth from '../utils/RequireAuth'
 
-const Home = React.lazy(() => import("../page/home/home"));
-const Login = React.lazy(() => import("../page/login/login"));
-const NotFound = React.lazy(() => import("../page/404/404"));
+const Home = React.lazy(() => import('../page/home/home'))
+const Login = React.lazy(() => import('../page/login/login'))
+const NotFound = React.lazy(() => import('../page/404/404'))
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: (
       <RequireAuth allowed={true} redirectTo="/login">
         <Home />
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/login",
+    path: '/login',
     element: (
       <RequireAuth allowed={false} redirectTo="/">
         <Login />
@@ -24,8 +24,8 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "*",
+    path: '*',
     element: <NotFound />,
   },
-]);
-export default router;
+])
+export default router

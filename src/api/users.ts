@@ -1,9 +1,13 @@
-import { post } from "../utils/http/request";
+import { post, get } from '../utils/http/request'
 interface LoginData {
-  username: string;
-  password: string;
+  username: string
+  password: string
 }
 
 export function login(data: LoginData) {
-  return post("/login", data);
+  return post('/login', data)
+}
+
+export function getMenu() {
+  return get('/menu')
 }
