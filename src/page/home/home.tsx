@@ -4,6 +4,7 @@ import NavLeft from '../../components/navLeft/navLeft'
 import MyBreadCrumb from '../../components/breadCrumb/breadCrumb'
 import MyHeader from '../../components/header/header'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
+import { Outlet } from 'react-router-dom'
 
 const { Header, Content, Footer, Sider } = Layout
 function Home() {
@@ -35,7 +36,7 @@ function Home() {
           </Header>
           <Content style={{ margin: '0 16px' }}>
             <MyBreadCrumb />
-            <div style={{ padding: 24, minHeight: 360 }}>Bill is a cat.</div>
+            <Outlet/>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>

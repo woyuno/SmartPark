@@ -16,7 +16,6 @@ function RequireAuth({ allowed, redirectTo, children }: Iprops) {
       navigate(redirectTo)
     }
   }, [allowed, isLogin, redirectTo])
-  console.log(children)
   return allowed === isLogin ? <>{children}</> : null
 }
 export default RequireAuth
