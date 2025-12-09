@@ -233,9 +233,9 @@ function Users() {
           批量删除
         </Button>
       </Card>
-      <Card className="mt">
+      <Card className="mt clearfix">
         <Table dataSource={dataList} columns={columns} rowKey={(record) => record.id} loading={loading} rowSelection={rowSelection} pagination={false} />
-        <Pagination className="fr mt" total={total} current={page} pageSize={pageSize} showSizeChanger showQuickJumper showTotal={(total) => `共 ${total} 条`} onChange={onChange} />
+        <Pagination className="fr mt mb" total={total} current={page} pageSize={pageSize} showSizeChanger showQuickJumper showTotal={(total) => `共 ${total} 条`} onChange={onChange} />
       </Card>
     </div>
   )
