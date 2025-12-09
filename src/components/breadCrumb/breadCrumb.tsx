@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import { authStore } from '../../store/store'
+import { authStore } from '../../store/authStore'
 import { Breadcrumb } from 'antd'
 interface MenuItem {
   key: string
@@ -27,7 +27,7 @@ function findBreadCrumbPath(path: string, menuItems: MenuItem[]): string[] {
 function MyBreadCrumb() {
   const location = useLocation()
   const { menuListStore } = authStore((state) => state)
-  const breadList = findBreadCrumbPath(location.pathname, menuListStore).map(item=>({title:item}))
-  return <Breadcrumb items={breadList} className='mt mb'/>
+  const breadList = findBreadCrumbPath(location.pathname, menuListStore).map((item) => ({ title: item }))
+  return <Breadcrumb items={breadList} className="mt mb" />
 }
 export default MyBreadCrumb

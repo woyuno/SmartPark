@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios'
 import { message } from 'antd'
-import { authStore } from '../../store/store'
+import { authStore } from '../../store/authStore'
 const http: AxiosInstance = axios.create({
   baseURL: 'https://www.demo.com',
   timeout: 5000,

@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import getAntdIcon from './getAntdIcon'
 import logo from '../../assets/logo.png'
 import './navLeft.scss'
-import { authStore } from '../../store/store'
-import { useNavigate,useLocation } from 'react-router-dom'
+import { authStore } from '../../store/authStore'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -24,7 +24,7 @@ function NavLeft() {
   useEffect(() => {
     configMenu()
   }, [menuListStore])
-  async function configMenu() { 
+  async function configMenu() {
     const mapedMenuItems = mapMenuItems(menuListStore)
     setMenuData(mapedMenuItems)
   }
@@ -37,7 +37,7 @@ function NavLeft() {
       children: item.children ? mapMenuItems(item.children) : null,
     }))
   }
-  function handleClick({key}:{key:string}){
+  function handleClick({ key }: { key: string }) {
     navigate(key)
   }
 
@@ -47,14 +47,7 @@ function NavLeft() {
         <img src={logo} alt="" width={18} />
         <h1>鹏远智慧园区</h1>
       </div>
-      <Menu
-        defaultSelectedKeys={['/dashboard']}
-        mode="inline"
-        theme="dark"
-        items={menuDate}
-        onClick={handleClick}
-        selectedKeys={[location.pathname]}
-      />
+      <Menu defaultSelectedKeys={['/dashboard']} mode="inline" theme="dark" items={menuDate} onClick={handleClick} selectedKeys={[location.pathname]} />
     </div>
   )
 }

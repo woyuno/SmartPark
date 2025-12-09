@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { authStore } from '../store/store'
+import { authStore } from '../store/authStore'
 import { useNavigate } from 'react-router-dom'
 interface Iprops {
   allowed: boolean

@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import router from './router/router'
 import { useEffect, useState } from 'react'
 import { generateRoutes } from './utils/generateRoutes'
-import { authStore } from './store/store'
+import { authStore } from './store/authStore'
 import { getMenu } from './api/users'
 
 function App() {
@@ -32,7 +32,6 @@ function App() {
   } else {
     return <div>等下</div>
   }
-
 }
 
 export default App

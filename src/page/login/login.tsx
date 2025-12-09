@@ -5,7 +5,7 @@ import logo from '../../assets/logo.png'
 import { Button, Form, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { login } from '../../api/users'
-import { authStore } from '../../store/store'
+import { authStore } from '../../store/authStore'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 function Login() {
@@ -22,7 +22,7 @@ function Login() {
           data: { token, username },
         } = await login(res)
         setLoading(false)
-        setTokenStore(token) 
+        setTokenStore(token)
         sessionStorage.setItem('username', username)
         navigate('/', { replace: true })
       })
@@ -50,13 +50,7 @@ function Login() {
               <Input.Password placeholder="请输入您的密码" prefix={<LockOutlined />} size="large" />
             </Form.Item>
             <Form.Item>
-              <Button
-                type="primary"
-                style={{ width: '100%' }}
-                size="large"
-                onClick={handleLogin}
-                loading={loading}
-              >
+              <Button type="primary" style={{ width: '100%' }} size="large" onClick={handleLogin} loading={loading}>
                 登录
               </Button>
             </Form.Item>

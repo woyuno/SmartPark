@@ -34,9 +34,9 @@ function Home() {
               <MyHeader />
             </div>
           </Header>
-          <Content style={{ margin: '0 16px' }}>
+          <Content style={{ margin: '0 16px', height: '90vh', overflowY: 'auto' }}>
             <MyBreadCrumb />
-            <Outlet/>
+            <Outlet />
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>

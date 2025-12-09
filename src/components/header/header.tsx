@@ -2,7 +2,8 @@ import { DownOutlined, PoweroffOutlined, UserOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Dropdown, Space } from 'antd'
 import { useState } from 'react'
-import { authStore } from '../../store/store'
+import { authStore } from '../../store/authStore'
+import { useNavigate } from 'react-router-dom'
 const items: MenuProps['items'] = [
   {
     key: '1',
@@ -17,11 +18,13 @@ const items: MenuProps['items'] = [
 ]
 
 function MyHeader() {
+  const navigator = useNavigate()
   const { clearTokenStore } = authStore((state) => state)
   const [collapsed, setCollapsed] = useState<boolean>(false)
   const onClick: MenuProps['onClick'] = ({ key }) => {
     if (key === '1') {
       // 跳转到个人中心
+      navigator('/personal')
     } else {
       // 退出登录
       clearTokenStore()

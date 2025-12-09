@@ -316,7 +316,7 @@ const managerMenuList = [
     key: '/energy',
   },
   {
-    icon: 'SettingOutlined', 
+    icon: 'SettingOutlined',
     label: '系统设置',
     key: '/settings',
   },
@@ -354,5 +354,66 @@ Mock.mock('https://www.demo.com/menu', 'get', (options: any) => {
       message: '失败',
       data: [],
     }
+  }
+})
+Mock.Random.extend({
+  phone: function () {
+    var phonePrefixs = ['13', '14', '15', '16'] // 自己写前缀哈
+    return this.pick(phonePrefixs) + Mock.mock(/\d{9}/) //Number()
+  },
+})
+// 租户列表接口
+Mock.mock('https://www.demo.com/userList', 'post', (options: any) => {
+  const { pageSize, page, companyName, contact, phone } = JSON.parse(options.body)
+  console.log('租户列表接收到参数', page, pageSize, companyName, contact, phone)
+  return {
+    code: 200,
+    message: '成功',
+    data: Mock.mock({
+      [`list|${pageSize}`]: [
+        {
+          id: "@string('number',6)", //随机生成一个六位数字id
+          name: '@cname', //随机生成一个人名
+          'status|1': ['1', '2', '3'],
+          tel: '@phone',
+          'business|1': ['制造业', '互联网', '新媒体', '美业', '新能源', '物流', '电商'],
+          email: '@email',
+          creditCode: "@string('number',18)",
+          industryNum: "@string('number',15)",
+          organizationCode: "@string('upper',9)",
+          legalPerson: '@cname',
+        },
+      ],
+      total: 78,
+    }),
+  }
+})
+//删除企业
+Mock.mock('https://www.demo.com/deleteUser', 'post', (options: any) => {
+  const { id } = JSON.parse(options.body)
+  console.log('删除企业', id)
+  return {
+    code: 200,
+    message: '成功',
+    data: '操作成功',
+  }
+})
+//批量删除企业
+Mock.mock('https://www.demo.com/batchDeleteUser', 'post', (options: any) => {
+  const { ids } = JSON.parse(options.body)
+  console.log('ids', ids)
+  return {
+    code: 200,
+    message: '成功',
+    data: '操作成功',
+  }
+})
+//编辑企业
+Mock.mock('https://www.demo.com/editUser', 'post', (options: any) => {
+  console.log('编辑企业收到参数', JSON.parse(options.body))
+  return {
+    code: 200,
+    message: '成功',
+    data: '操作成功',
   }
 })
